@@ -10,7 +10,7 @@ Installation
 
 for antigen users
 -----------------
-add following to your .zshrc::
+add following to your `.zshrc`::
 
     antigen bundle wkentaro/wstool_cd
 
@@ -21,7 +21,7 @@ download the repository to your local space::
 
     $ git clone https://github.com/wkentaro/wstool_cd.git ~/.wstool_cd
 
-add following to your .bashrc or .zshrc::
+add following to your `.bashrc` or `.zshrc`::
 
     source ~/.wstool_cd/wstool_cd.sh
     source ~/.wstool_cd/wstool_cd-completion.bash  # this also supports zsh
