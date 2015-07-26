@@ -27,6 +27,13 @@ add following to your .bashrc or .zshrc::
     source ~/.wstool_cd/wstool_cd-completion.bash  # this also supports zsh
 
 
+Screencast
+==========
+This is demo of using wstool_cd:
+
+.. image:: assets/wstool_cd.gif
+
+
 License
 =======
 | Copyright (C) 2015 Kentaro Wada
