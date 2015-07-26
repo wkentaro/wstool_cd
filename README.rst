@@ -27,6 +27,16 @@ add following to your `.bashrc` or `.zshrc`::
     source ~/.wstool_cd/wstool_cd-completion.bash  # this also supports zsh
 
 
+Usage
+=====
+in workspace which is managed by wstool::
+
+    # change dir to repository_name
+    $ wstool_cd repository_name
+    # change dir to workspace's root
+    $ wstool_cd
+
+
 Screencast
 ==========
 This is demo of using wstool_cd:
