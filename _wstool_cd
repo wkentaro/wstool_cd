@@ -1,0 +1,7 @@
+#compdef wstool_cd
+
+_wstool_cd () {
+    local -a _repos
+    _repos=( $(wstool info --only=localname) )
+    _describe -t repos "Repositories" _repos
+}
