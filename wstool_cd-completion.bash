@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# ZSH support
+if [[ -n ${ZSH_VERSION-} ]]; then
+    autoload -U +X bashcompinit && bashcompinit
+fi
+
 _wstool_cd ()
 {
     local cur prev opts
