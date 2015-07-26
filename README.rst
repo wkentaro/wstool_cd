@@ -24,7 +24,7 @@ download the repository to your local space::
 add following to your `.bashrc` or `.zshrc`::
 
     source ~/.wstool_cd/wstool_cd.sh
-    source ~/.wstool_cd/wstool_cd-completion.bash  # this also supports zsh
+    source ~/.wstool_cd/wstool_cd-completion.sh
 
 
 Usage
