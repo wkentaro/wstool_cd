@@ -7,6 +7,9 @@ fi
 
 _wstool_cd ()
 {
+    # check if in workspace
+    wstool info --managed-only >/dev/null 2>&1 || return 1
+
     local cur prev opts
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
