@@ -3,7 +3,8 @@
 wstool_cd () {
   local dest
   # check if in workspace
-  if ! wstool set >/dev/null 2>&1; then
+  wstool info --managed-only >/dev/null 2>&1
+  if [ ! $? -eq 0 ]; then
     echo 'not in workspace'
     return 1
   fi
