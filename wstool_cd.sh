@@ -22,6 +22,7 @@ wstool_cd () {
   # check if wstool installed
   which wstool >/dev/null 2>&1 || {
     echo "please install wstool"
+    echo "run \`pip install wstool\`"
     return 1
   }
   # check if in workspace
