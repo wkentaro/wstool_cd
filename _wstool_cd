@@ -1,10 +1,10 @@
 #compdef wstool_cd
 
 _wstool_cd () {
-    # check if in workspace
-    wstool info --managed-only >/dev/null 2>&1 || return 1
+  # check if in workspace
+  [ "$(_wstool_cd_get_workspace)" = "" ] && return 1
 
-    local -a _repos
-    _repos=( $(wstool info --only=localname) )
-    _describe -t repos "Repositories" _repos
+  local -a _repos
+  _repos=( $(wstool info --only=localname) )
+  _describe -t repos "Repositories" _repos
 }
