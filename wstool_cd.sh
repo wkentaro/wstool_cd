@@ -2,16 +2,25 @@
 
 wstool_cd () {
   local dest
+  local ws_root
   # check if in workspace
-  wstool status >/dev/null 2>&1
-  if [ ! $? -eq 0 ]; then
+  ws_root=$(python -c "\
+import os
+import wstool.common
+from wstool.cli_common import get_workspace
+try:
+    ws=get_workspace(argv=[], shell_path=os.getcwd(), config_filename='.rosinstall')
+    print(ws)
+except wstool.common.MultiProjectException:
+    pass
+")
+  if [ "$ws_root" = "" ]; then
     echo 'not in workspace'
     return 1
   fi
   # execute commands
   if [ "$1" = "" ]; then
-    dest=$(wstool info --managed-only --data-only | sed -n '1p' | awk '{print $2}')
-    cd $dest
+    cd $ws_root
   else
     dest=$(wstool info $1 2>&1 | grep '^Path' | awk '{print $2}')
     if [ "$dest" = "" ]; then
