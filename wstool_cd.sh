@@ -12,19 +12,13 @@ try:
     print(ws)
 except wstool.common.MultiProjectException:
     pass
-"
+" 2>/dev/null
 }
 
 
 wstool_cd () {
-  local dest
-  local ws_root
-  # check if wstool installed
-  which wstool >/dev/null 2>&1 || {
-    echo "please install wstool"
-    echo "run \`pip install wstool\`"
-    return 1
-  }
+  local localname dest ws_root
+  localname=$1
   # check if in workspace
   ws_root=$(_wstool_cd_get_workspace)
   [ "$ws_root" = "" ] && {
@@ -32,12 +26,15 @@ wstool_cd () {
     return 1
   }
   # execute commands
-  if [ "$1" = "" ]; then
+  if [ "$localname" = "" ]; then
     cd $ws_root
   else
-    dest=$(wstool info $1 2>&1 | grep '^Path' | awk '{print $2}')
+    dest=$(wstool info $localname 2>&1 | grep '^Path' | awk '{print $2}')
     if [ "$dest" = "" ]; then
-      echo "$1 not found"
+      echo "$localname not found" >&2
+    elif [ ! -d "$dest" ]; then
+      echo "the repo '$localname' path '$dest' not exist" >&2
+      echo "need \`wstool update $localname\`?"
     else
       cd $dest
     fi
