@@ -8,7 +8,7 @@ fi
 _wstool_cd ()
 {
     # check if in workspace
-    wstool info --managed-only >/dev/null 2>&1 || return 1
+    [ "$(_wstool_cd_get_workspace)" = "" ] && return 1
 
     local cur prev opts
     COMPREPLY=()
@@ -26,4 +26,4 @@ _wstool_cd ()
     fi
 }
 
-complete -F _wscd wscd
+complete -F _wstool_cd wstool_cd
