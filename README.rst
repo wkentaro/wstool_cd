@@ -6,22 +6,7 @@ wstool_cd
 
 Installation
 ============
-
-
-for antigen users
------------------
-install by pip::
-
-   $ pip install wstool_cd
-
-add following to your `.zshrc`::
-
-    antigen bundle wkentaro/wstool_cd
-
-
-for others
-----------
-download the repository to your local space::
+install via pypi::
 
     $ pip install wstool_cd
 
