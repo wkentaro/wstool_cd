@@ -38,7 +38,7 @@ def get_data_files():
 
 
 # publish helper
-version = '0.3'
+version = '0.4'
 if sys.argv[-1] == 'publish':
     for cmd in [
             'python setup.py register sdist upload',
