@@ -7,8 +7,8 @@ import os
 import wstool.common
 from wstool.cli_common import get_workspace
 try:
-    ws=get_workspace(argv=[], shell_path=os.getcwd(),
-                     config_filename='.rosinstall')
+    ws = get_workspace(argv=[], shell_path=os.getcwd(),
+                       config_filename='.rosinstall')
     print(ws)
 except wstool.common.MultiProjectException:
     pass
@@ -33,7 +33,7 @@ wstool_cd () {
     if [ "$dest" = "" ]; then
       echo "$localname not found" >&2
     elif [ ! -d "$dest" ]; then
-      echo "the repo '$localname' path '$dest' not exist" >&2
+      echo "path '$dest' for '$localname' not exist" >&2
       echo "need \`wstool update $localname\`?" >&2
     else
       cd $dest
