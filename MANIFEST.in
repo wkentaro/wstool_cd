@@ -1,0 +1,1 @@
+include completion/wstool_cd-completion.bash completion/_wstool_cd

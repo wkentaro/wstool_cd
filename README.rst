@@ -10,6 +10,10 @@ Installation
 
 for antigen users
 -----------------
+install by pip::
+
+   $ pip install wstool_cd
+
 add following to your `.zshrc`::
 
     antigen bundle wkentaro/wstool_cd
@@ -19,12 +23,11 @@ for others
 ----------
 download the repository to your local space::
 
-    $ git clone https://github.com/wkentaro/wstool_cd.git ~/.wstool_cd
+    $ pip install wstool_cd
 
 add following to your `.bashrc` or `.zshrc`::
 
-    source ~/.wstool_cd/wstool_cd.sh
-    source ~/.wstool_cd/wstool_cd-completion.bash
+    source `which wstool_cd.sh`
 
 
 Usage
@@ -35,6 +38,10 @@ in workspace which is managed by wstool::
     $ wstool_cd repository_name
     # change dir to workspace's root
     $ wstool_cd
+
+maybe this alias is good::
+
+    $ alias wscd='wstool_cd'
 
 
 Screencast
