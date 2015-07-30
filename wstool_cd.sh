@@ -22,7 +22,7 @@ wstool_cd () {
   # check if in workspace
   ws_root=$(_wstool_cd_get_workspace)
   [ "$ws_root" = "" ] && {
-    echo 'not in workspace'
+    echo 'not in workspace' >&2
     return 1
   }
   # execute commands
@@ -34,7 +34,7 @@ wstool_cd () {
       echo "$localname not found" >&2
     elif [ ! -d "$dest" ]; then
       echo "the repo '$localname' path '$dest' not exist" >&2
-      echo "need \`wstool update $localname\`?"
+      echo "need \`wstool update $localname\`?" >&2
     else
       cd $dest
     fi
