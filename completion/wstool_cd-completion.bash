@@ -7,8 +7,10 @@ fi
 
 _wstool_cd ()
 {
+    local ws_root
     # check if in workspace
-    [ "$(_wstool_cd_get_workspace)" = "" ] && return 1
+    ws_root=$(_wstool_cd_get_workspace 2>/dev/null)
+    [ "$ws_root" = "" ] && return 1
 
     local cur prev opts
     COMPREPLY=()
@@ -17,7 +19,7 @@ _wstool_cd ()
     opts=""
 
     if [[ ${opts} = "" ]] ; then
-        opts=$(wstool info --only=localname)
+        opts=$(wstool info -t $ws_root --only=localname)
     fi
 
     if [[ ${cur} = * ]] ; then

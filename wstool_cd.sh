@@ -2,7 +2,8 @@
 
 
 _wstool_cd_get_workspace () {
-  python -c "\
+  local ws_root
+  ws_root=$(python -c "\
 import os
 import wstool.common
 from wstool.cli_common import get_workspace
@@ -12,7 +13,16 @@ try:
     print(ws)
 except wstool.common.MultiProjectException:
     pass
-" 2>/dev/null
+" 2>/dev/null)
+  # you can set WSTOOL_DEFAULT_WS in your shell
+  if [ "$ws_root" = "" ]; then
+    if [ "$WSTOOL_DEFAULT_WORKSPACE" = "" ]; then
+      echo 'not in workspace' >&2
+      return 1
+    fi
+    ws_root=$WSTOOL_DEFAULT_WORKSPACE
+  fi
+  echo $ws_root
 }
 
 
@@ -21,15 +31,11 @@ wstool_cd () {
   localname=$1
   # check if in workspace
   ws_root=$(_wstool_cd_get_workspace)
-  [ "$ws_root" = "" ] && {
-    echo 'not in workspace' >&2
-    return 1
-  }
   # execute commands
   if [ "$localname" = "" ]; then
     cd $ws_root
   else
-    dest=$(wstool info $localname 2>&1 | grep '^Path' | awk '{print $2}')
+    dest=$(wstool info $localname -t $ws_root 2>&1 | grep '^Path' | awk '{print $2}')
     if [ "$dest" = "" ]; then
       echo "$localname not found" >&2
     elif [ ! -d "$dest" ]; then
