@@ -17,16 +17,22 @@ add following to your `.bashrc` or `.zshrc`::
 
 Usage
 =====
-in workspace which is managed by wstool::
-
-    # change dir to repository_name
-    $ wstool_cd repository_name
-    # change dir to workspace's root
-    $ wstool_cd
-
 maybe this alias is good::
 
     $ alias wscd='wstool_cd'
+
+in workspace which is managed by wstool::
+
+    $ wscd  # cd to workspace's root
+    $ wscd repo0  # cd to a repo0
+
+you can set `WSTOOL_DEFAULT_WORKSPACE` to cd from anywhere::
+
+    $ export WSTOOL_DEFAULT_WORKSPACE=$HOME/ros/indigo/src
+    $ pwd  # not in workspace
+    /home/wkentaro
+    $ wscd ros_comm && pwd # if actually not in workspace, cd to default workspace
+    /home/wkentaro/ros/indigo/src/ros_comm
 
 
 Screencast
