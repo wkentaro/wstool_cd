@@ -26,7 +26,7 @@ in workspace which is managed by wstool::
     $ wscd  # cd to workspace's root
     $ wscd repo0  # cd to a repo0
 
-you can set `WSTOOL_DEFAULT_WORKSPACE` to cd from anywhere::
+you can set ``WSTOOL_DEFAULT_WORKSPACE`` to cd from anywhere::
 
     $ export WSTOOL_DEFAULT_WORKSPACE=$HOME/ros/indigo/src
     $ pwd  # not in workspace
