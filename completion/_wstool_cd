@@ -1,12 +1,9 @@
 #compdef wstool_cd
 
 _wstool_cd () {
-  local ws_root
-  # check if in workspace
-  ws_root=$(_wstool_cd_get_workspace 2>/dev/null)
-  [ "$ws_root" = "" ] && return 1
-
-  local -a _repos
-  _repos=( $(wstool info -t $ws_root --only=localname) )
-  _describe -t repos "Repositories" _repos
+  local e
+  e=$(dirname ${funcsourcetrace[1]%:*})/wstool_cd-completion.bash
+  if [ -f $e ]; then
+    . $e
+  fi
 }

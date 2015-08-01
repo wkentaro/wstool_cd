@@ -29,11 +29,12 @@ def get_data_files():
     location = {
         'bash': get_completion_install_location(shell='bash'),
         'zsh': get_completion_install_location(shell='zsh'),
-        }
+    }
     data_files = [
         (location['bash'], ['completion/wstool_cd-completion.bash']),
-        (location['zsh'], ['completion/_wstool_cd'])
-        ]
+        (location['zsh'], ['completion/wstool_cd-completion.bash',
+                           'completion/_wstool_cd']),
+    ]
     return data_files
 
 
