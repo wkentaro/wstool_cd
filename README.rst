@@ -35,6 +35,14 @@ you can set ``WSTOOL_DEFAULT_WORKSPACE`` to cd from anywhere::
     /home/wkentaro/ros/indigo/src/ros_comm
 
 
+Advanced
+========
+this is sometimes dangerous, but useful::
+
+    $ source `which wstool_cd_wrapper.sh`
+    $ wstool cd repo0  # use cd as sub-command of wstool
+
+
 Screencast
 ==========
 This is demo of using wstool_cd:
