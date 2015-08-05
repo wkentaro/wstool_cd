@@ -42,6 +42,15 @@ this is sometimes dangerous, but useful::
     $ source `which wstool_cd_wrapper.sh`
     $ wstool cd repo0  # use cd as sub-command of wstool
 
+this works because::
+
+    wstool () {
+      case "$1" in
+        (cd) shift
+         wstool_cd $@ ;;
+        (*) command wstool $@ ;;
+      esac
+    }
 
 Screencast
 ==========
