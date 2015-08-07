@@ -8,34 +8,36 @@ import subprocess
 from setuptools import setup, find_packages
 
 
-def get_completion_install_location(shell):
-    uname = platform.uname()[0]
-    is_root = (os.geteuid() == 0)
-
-    prefix = ''
-    if shell == 'bash':
-        if is_root and uname == 'Linux':
-            prefix = '/'
-        location = os.path.join(prefix, 'etc/bash_completion.d')
-    elif shell == 'zsh':
-        location = os.path.join(prefix, 'share/zsh/site-functions')
-    else:
-        raise ValueError('unsupported shell: {0}'.format(shell))
-
-    return location
-
-
 def get_data_files():
-    location = {
-        'bash': get_completion_install_location(shell='bash'),
-        'zsh': get_completion_install_location(shell='zsh'),
-    }
-    data_files = [
-        (location['bash'], ['completion/wstool_cd-completion.bash']),
-        (location['zsh'], ['completion/wstool_cd-completion.bash',
-                           'completion/_wstool_cd']),
-    ]
+
+    def get_completion_install_location(shell):
+        uname = platform.uname()[0]
+        is_root = (os.geteuid() == 0)
+        prefix = ''
+        if is_root:
+            # this is system install
+            if uname == 'Linux':
+                prefix = '/'
+            elif uname == 'Darwin':
+                prefix = '/usr'
+        if shell == 'bash':
+            location = os.path.join(prefix, 'etc/bash_completion.d')
+        elif shell == 'zsh':
+            location = os.path.join(prefix, 'share/zsh/site-functions')
+        else:
+            raise ValueError('unsupported shell: {0}'.format(shell))
+        return location
+
+    loc = dict(bash=get_completion_install_location(shell='bash'),
+               zsh=get_completion_install_location(shell='zsh'))
+    files = dict(bash=['completion/wstool_cd-completion.bash'],
+                 zsh=['completion/wstool_cd-completion.bash',
+                      'completion/_wstool_cd'])
+    data_files = []
+    data_files.append((loc['bash'], files['bash']))
+    data_files.append((loc['zsh'], files['zsh']))
     return data_files
+
 
 version = '0.8'
 
