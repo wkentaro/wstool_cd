@@ -1,6 +1,7 @@
-=========
-wstool_cd
-=========
+=============
+``wstool_cd``
+=============
+
 ``cd`` to repositories in workspace which is managed by `vcstools/wstool <https://github.com/vcstools/wstool>`_.
 
 
