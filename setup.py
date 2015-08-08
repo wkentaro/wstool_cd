@@ -56,7 +56,7 @@ setup(
     name='wstool_cd',
     version=version,
     description='Tool to change directory in workspace managed by wstool',
-    long_description=long_desc,
+    long_description=open('README.rst').read(),
     author='Kentaro Wada',
     author_email='www.kentaro.wada@gmail.com',
     url='http://github.com/wkentaro/wstool_cd',
