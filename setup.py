@@ -14,11 +14,11 @@ def get_data_files():
         uname = platform.uname()[0]
         is_root = (os.geteuid() == 0)
         prefix = ''
-        if is_root:
-            # this is system install
-            if uname == 'Linux':
+        if is_root:  # system install
+            if (uname == 'Linux' or
+                    (uname == 'Darwin' and shell == 'bash')):
                 prefix = '/'
-            elif uname == 'Darwin':
+            elif uname == 'Darwin' and shell == 'zsh':
                 prefix = '/usr'
         if shell == 'bash':
             location = os.path.join(prefix, 'etc/bash_completion.d')
