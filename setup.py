@@ -50,8 +50,6 @@ if sys.argv[-1] == 'publish':
         subprocess.check_call(cmd, shell=True)
     sys.exit(0)
 
-long_desc = ('Simple command line tool to change directory'
-             ' in workspace which is managed by wstool.')
 setup(
     name='wstool_cd',
     version=version,
