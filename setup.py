@@ -67,7 +67,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: POSIX',
         'Topic :: Internet :: WWW/HTTP',
-        ],
+    ],
     scripts=['wstool_cd.sh', 'wstool_cd_wrapper.sh'],
     data_files=get_data_files(),
-    )
+)
