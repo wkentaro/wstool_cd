@@ -58,7 +58,7 @@ setup(
     author='Kentaro Wada',
     author_email='www.kentaro.wada@gmail.com',
     url='http://github.com/wkentaro/wstool_cd',
-    install_requires=['wstool'],
+    install_requires=open('requirements.txt').readlines(),
     license='MIT',
     keywords='utility',
     classifiers=[
