@@ -43,7 +43,7 @@ def get_data_files():
     return data_files
 
 
-version = '0.12'
+version = '0.13'
 
 # publish helper
 if sys.argv[-1] == 'publish':
