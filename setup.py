@@ -7,52 +7,54 @@ import platform
 import subprocess
 from setuptools import setup, find_packages
 
+from distutils.core import Command
+
+
+def _resolve_prefix(prefix, type):
+    osx_system_prefix = '/System/Library/Frameworks/Python.framework/Versions'
+    if type == 'man':
+        if prefix == '/usr':
+            return '/usr/share'
+        if sys.prefix.startswith(osx_system_prefix):
+            return '/usr/share'
+    elif type == 'bash_comp':
+        if prefix == '/usr':
+            return '/'
+        if sys.prefix.startswith(osx_system_prefix):
+            return '/'
+    elif type == 'zsh_comp':
+        if sys.prefix.startswith(osx_system_prefix):
+            return '/usr'
+    else:
+        raise ValueError('not supported type')
+    return prefix
+
 
 def get_data_files():
-
-    def get_completion_install_location(shell):
-        uname = platform.uname()[0]
-        is_root = (os.geteuid() == 0)
-        prefix = ''
-        if is_root:
-            # this is system install
-            if uname == 'Linux' and shell == 'bash':
-                prefix = '/'
-            elif uname == 'Linux' and shell == 'zsh':
-                prefix = '/usr/local'
-            elif uname == 'Darwin' and shell == 'bash':
-                prefix = '/'
-            elif uname == 'Darwin' and shell == 'zsh':
-                prefix = '/usr'
-        if shell == 'bash':
-            location = os.path.join(prefix, 'etc/bash_completion.d')
-        elif shell == 'zsh':
-            location = os.path.join(prefix, 'share/zsh/site-functions')
-        else:
-            raise ValueError('unsupported shell: {0}'.format(shell))
-        return location
-
-    loc = dict(bash=get_completion_install_location(shell='bash'),
-               zsh=get_completion_install_location(shell='zsh'))
-    files = dict(bash=['completion/wstool_cd-completion.bash'],
-                 zsh=['completion/wstool_cd-completion.bash',
-                      'completion/_wstool_cd'])
     data_files = []
-    data_files.append((loc['bash'], files['bash']))
-    data_files.append((loc['zsh'], files['zsh']))
+    bash_comp_dest = _resolve_prefix('', type='bash_comp')
+    data_files.append((bash_comp_dest, ['completion/wstool_cd-completion.bash']))
+    zsh_comp_dest = _resolve_prefix('', type='zsh_comp')
+    data_files.append((zsh_comp_dest, ['completion/wstool_cd-completion.zsh',
+                                       'completion/_wstool_cd']))
     return data_files
 
 
 version = '0.13'
 
-# publish helper
-if sys.argv[-1] == 'publish':
-    for cmd in [
-            'python setup.py register sdist upload',
-            'git tag {}'.format(version),
-            'git push origin master --tag']:
-        subprocess.check_call(cmd, shell=True)
-    sys.exit(0)
+class WstoolCdPublish(Command):
+    description = 'Publish helper'
+    user_options = []
+    def initialize_options(self): pass
+    def finalize_options(self): pass
+    def run(self):
+        self.run_command('register')
+        self.run_command('sdist')
+        self.run_command('upload')
+        subprocess.call(['git', 'tag', version])
+        subprocess.call(['git', 'push', 'origin', 'master', '--tag'])
+
+cmdclass = {'publish': WstoolCdPublish}
 
 setup(
     name='wstool_cd',
@@ -63,6 +65,7 @@ setup(
     author_email='www.kentaro.wada@gmail.com',
     url='http://github.com/wkentaro/wstool_cd',
     install_requires=open('requirements.txt').readlines(),
+    cmdclass=cmdclass,
     license='MIT',
     keywords='utility',
     classifiers=[
