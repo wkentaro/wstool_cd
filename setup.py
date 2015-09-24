@@ -32,9 +32,11 @@ def _resolve_prefix(prefix, type):
 
 def get_data_files():
     data_files = []
-    bash_comp_dest = _resolve_prefix('', type='bash_comp')
+    bash_comp_dest = os.path.join(_resolve_prefix('', type='bash_comp'),
+                                  'etc/bash_completion.d')
     data_files.append((bash_comp_dest, ['completion/wstool_cd-completion.bash']))
-    zsh_comp_dest = _resolve_prefix('', type='zsh_comp')
+    zsh_comp_dest = os.path.join(_resolve_prefix('', type='zsh_comp'),
+                                 'share/zsh/site-functions')
     data_files.append((zsh_comp_dest, ['completion/wstool_cd-completion.bash',
                                        'completion/_wstool_cd']))
     return data_files
