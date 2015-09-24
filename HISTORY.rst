@@ -3,6 +3,49 @@ History
 =======
 
 
+0.16 / 2015-09-25
+=================
+
+* 0.16
+* Fix location of completion scripts
+
+0.15 / 2015-09-25
+=================
+
+* 0.15
+* Fix typo .zsh -> .bash
+
+0.14 / 2015-09-13
+=================
+
+* 0.14
+* Update _resolve_prefix in setup.py
+* Update wstool_cd alias
+
+0.13 / 2015-08-24
+=================
+
+* 0.13
+* Fix location for linux
+
+0.12 / 2015-08-24
+=================
+
+* 0.12
+* Include txt to install
+* Add AUTHORS
+* Add HISTORY
+
+0.11 / 2015-08-18
+=================
+
+* 0.11
+* Use requirements.txt
+* misc
+* Remove no need val
+* Install bash completion to /etc/bash_completion.d even if Darwin
+* Make setup.py executable
+
 0.10 / 2015-08-08
 =================
 
