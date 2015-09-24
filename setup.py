@@ -40,7 +40,7 @@ def get_data_files():
     return data_files
 
 
-version = '0.14'
+version = '0.15'
 
 class WstoolCdPublish(Command):
     description = 'Publish helper'
