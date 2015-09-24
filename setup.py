@@ -35,7 +35,7 @@ def get_data_files():
     bash_comp_dest = _resolve_prefix('', type='bash_comp')
     data_files.append((bash_comp_dest, ['completion/wstool_cd-completion.bash']))
     zsh_comp_dest = _resolve_prefix('', type='zsh_comp')
-    data_files.append((zsh_comp_dest, ['completion/wstool_cd-completion.zsh',
+    data_files.append((zsh_comp_dest, ['completion/wstool_cd-completion.bash',
                                        'completion/_wstool_cd']))
     return data_files
 
