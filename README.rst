@@ -2,6 +2,9 @@
 ``wstool_cd``
 =============
 
+.. image:: https://img.shields.io/pypi/v/wstool_cd.svg
+    :target: https://pypi.python.org/pypi/wstool_cd
+
 ``cd`` to repositories in workspace which is managed by `vcstools/wstool <https://github.com/vcstools/wstool>`_.
 
 
