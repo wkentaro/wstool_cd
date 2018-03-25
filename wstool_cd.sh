@@ -27,17 +27,22 @@ except wstool.common.MultiProjectException:
 
 
 wstool_cd () {
-  local localname dest ws_root
-  localname=$1
-  # check if in workspace
+  local query localnames localname dest
+  query=$1
   ws_root=$(_wstool_cd_get_workspace)
   # execute commands
-  if [ "$localname" = "" ]; then
+  if [ "$query" = "" ]; then
     cd $ws_root
   else
-    dest=$(wstool info $localname -t $ws_root 2>&1 | grep '^Path' | awk '{print $2}')
-    if [ "$dest" = "" ]; then
-      echo "$localname not found" >&2
+    localnames=$(wstool info --data-only --only=localname)
+    if [[ $(echo $localnames | egrep "^$query$") != "" ]]; then
+      localname=$query
+    else
+      localname=$(echo $localnames | percol --query="$query")
+    fi
+    dest=$ws_root/$localname
+    if [ "$localname" = "" ]; then
+      return
     elif [ ! -d "$dest" ]; then
       echo "path '$dest' for '$localname' not exist" >&2
       echo "need \`wstool update $localname\`?" >&2
